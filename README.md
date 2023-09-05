@@ -1,4 +1,4 @@
-# __Private__Image-To-Scope-Converter
+# Image-To-Scope-Converter
 Raster oscilloscope images generator from an arbitrary bitmap file.
 <br/>
 <p align="center">
