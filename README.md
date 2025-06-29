@@ -1,29 +1,30 @@
 # Image-To-Scope-Converter
-Raster oscilloscope images generator from an arbitrary bitmap file.
+Raster oscilloscope image generator from an arbitrary bitmap file.
 <br/>
 <p align="center">
      <img width="600" src="https://github.com/Kononenko-K/Image-To-Scope-Converter/blob/main/pics/slowmo.gif">
 </p>
 
 ## Overview
-The idea behind this project is based on the fact that a rapid signal change is almost imperceptible on a CRT. Thus, if we make a signal hop with small rise/fall time from point A to point B there will be no movement traces on the display. Here I use MCU's DAC to generate horisontal and vertical scan signals and open-drain GPIO output to form the sharpest edge possible by shorting DAC output to the ground (which is quite not good but but the output impedance of the DAC is comparatively high anyway). So that I can return the dot on the screen to zero point when the pixel is white. This allows to display a raster image on any 2-channel CRT oscilloscope in XY mode without changing its schematic for brigtness modulation.
+The idea behind this project is based on the fact that rapid signal transitions are almost imperceptible on a CRT. Thus, if we make a signal jump with a very short rise/fall time from point A to point B, there will be no visible trace of movement on the display. Here, I use the MCU's DAC to generate horizontal and vertical scan signals, and an open-drain GPIO output to create the sharpest possible edge by shorting the DAC output to ground (which is not ideal, but the DAC's output impedance is relatively high anyway). This allows to return the dot on the screen to the zero position when the pixel is white, enabling the display of a raster image on any 2-channel CRT oscilloscope in XY mode without modifying its circuitry for brightness modulation.
+
 ## [Hardware](Hardware)
 <p align="center">
     <img width="600" src="https://github.com/Kononenko-K/Image-To-Scope-Converter/blob/main/pics/board.jpg">
 </p>
 
-The board contains STM32 F405 series MCU, USB-UART converter, Type-C connector, negative voltage generator and wideband 2-channel OP amp. There are [KiCad project](/Hardware), [Gerber files](/Hardware/gerber) and [PDF](/Hardware/project.pdf) avaliable. For correct operation DACx and PWMx should be both connected to Ax pins respectively.
+The board features an STM32F405 series MCU, USB-UART converter, USB Type-C connector, negative voltage generator, and a wideband 2-channel operational amplifier. [KiCad project files](/Hardware/PCB) and [PDF documentation](/Hardware/PCB/project.pdf) are avaliable. For correct operation, DACx and PWMx outputs should both be connected to the corresponding Ax pins.
 
 ## [Firmware](Firmware)
-The firmware is set to work with 1 MBd USART speed, 256x256 image resolution, and adjustable frame rate. The MCU receives an 8192 byte array of basically XMB format images with 1 bit per pixel encoding. The frame rate can be adjusted with the button on PB1 pin. The test image is included in the firmware and can be found in [test_im.h](/Firmware/Core/Src/test_im.h). It will be displayed rignt after power on until another image is loaded through UART. 
-The project is made in STM32CubeIDE with HAL.
+The firmware is configured to work with a 1 MBd USART speed, 256×256 image resolution, and adjustable frame rate. The MCU receives an 8192-byte array representing XBM-format images with 1 bit per pixel encoding. The frame rate can be adjusted using the button connected to the PB1 pin. A test image is included in the firmware and can be found in [test_im.h](/Firmware/Core/Src/test_im.h). It is displayed immediately after power-on until another image is loaded via UART.
+The project is developed using STM32CubeIDE with HAL.
 
 ## [Software](Software)
 <p align="center">
     <img width="500" src="https://github.com/Kononenko-K/Image-To-Scope-Converter/blob/main/pics/ui.png">
 </p>
 
-I made a python PyQt5 script for the project GUI that can generate properly formatted data from an arbitrary image. Here is the [code](/Software/ui.py) and [requirements](/Software/requirements.txt).
+I developed a Python PyQt5 script for the project GUI that generates properly formatted data from arbitrary images. Here are the [source code](/Software/ui.py) and [requirements](/Software/requirements.txt).
 
 ## [Enclosure](Enclosure)
 <p align="center">
@@ -31,4 +32,8 @@ I made a python PyQt5 script for the project GUI that can generate properly form
     <img width="400" src="https://github.com/Kononenko-K/Image-To-Scope-Converter/blob/main/pics/2.png">
 </p>
 
-STL files of the [case](/Enclosure/1.stl) and its [cover](/Enclosure/2.stl) for 3D printing.
+STL files for the [case](/Hardware/Enclosure/1.stl) and its [cover](/Hardware/Enclosure/2.stl) for 3D printing.
+
+## License
+- The **Software** and **Firmware** in this project are licensed under the [MIT License](/Firmware/LICENSE), with the exception of portions of the firmware code that are copyrighted by STMicroelectronics; such portions are subject to the original licensing terms provided by STMicroelectronics.
+- The **Hardware** in this project is licensed under the [CERN Open Hardware Licence Permissive (CERN OHL-P)](/Hardware/LICENSE).
