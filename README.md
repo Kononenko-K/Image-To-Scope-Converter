@@ -21,10 +21,11 @@ The project is developed using STM32CubeIDE with HAL.
 
 ## [Software](Software)
 <p align="center">
-    <img width="500" src="https://github.com/Kononenko-K/Image-To-Scope-Converter/blob/main/pics/ui.png">
+    <img width="400" src="https://github.com/Kononenko-K/Image-To-Scope-Converter/blob/main/pics/ui_dark.png">
+    <img width="400" src="https://github.com/Kononenko-K/Image-To-Scope-Converter/blob/main/pics/ui_light.png">
 </p>
 
-I developed a Python PyQt5 script for the project GUI that generates properly formatted data from arbitrary images. Here are the [source code](/Software/ui.py) and [requirements](/Software/requirements.txt).
+I developed a Python PyQt6 script for the project GUI that generates properly formatted data from arbitrary images. Here are the [source code](/Software/ui.py) and [requirements](/Software/requirements.txt).
 
 ## [Enclosure](/Hardware/Enclosure)
 <p align="center">

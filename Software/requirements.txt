@@ -1,3 +1,4 @@
-PyQt5==5.15.4
-opencv-python==4.7.0.68
+darkdetect==0.8.0
+PyQt6==6.8.1
+opencv-python==4.12.0.88
 pyserial==3.5
